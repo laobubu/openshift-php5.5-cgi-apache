@@ -1,0 +1,69 @@
+#!/bin/bash
+
+function install_php() {
+	
+	pushd ${OPENSHIFT_DIY_DIR}
+	rm -f php-${DIST_PHP_VER}.tar.gz
+	wget http://php.net/distributions/php-${DIST_PHP_VER}.tar.gz
+	tar -zxf php-${DIST_PHP_VER}.tar.gz
+	rm -f php-${DIST_PHP_VER}.tar.gz
+	pushd php-${DIST_PHP_VER}
+	
+	mkdir -p ${LIB_DIR}
+	mkdir -p ${CONF_DIR}/php5/conf.d/
+	
+	./configure \
+            --with-libdir=lib64 \
+            --prefix=${ROOT_DIR} \
+            --with-config-file-path=${CONF_DIR}/php5/ \
+            --with-config-file-scan-dir=${CONF_DIR}/php5/conf.d/ \
+            --with-layout=PHP \
+            --with-curl \
+            --with-pear \
+            --with-gd \
+            --with-zlib \
+            --with-mhash \
+            --with-mysql \
+            --with-pgsql \
+            --with-mysqli \
+            --with-pdo-mysql \
+            --with-pdo-pgsql \
+            --with-openssl \
+            --with-xmlrpc \
+            --with-xsl \
+            --with-bz2 \
+            --with-gettext \
+            --with-readline \
+            --with-kerberos \
+            --disable-debug \
+            --enable-cli \
+            --enable-inline-optimization \
+            --enable-exif \
+            --enable-wddx \
+            --enable-zip \
+            --enable-bcmath \
+            --enable-calendar \
+            --enable-ftp \
+            --enable-mbstring \
+            --enable-soap \
+            --enable-sockets \
+            --enable-shmop \
+            --enable-dba \
+            --enable-sysvsem \
+            --enable-sysvshm \
+            --enable-sysvmsg \
+            --enable-opcache
+	make
+	make install
+	
+	popd
+	rm -rf php-${DIST_PHP_VER}
+	popd
+}
+
+function check_php() {
+	if [`$OPENSHIFT_RUNTIME_DIR/bin/php-cgi -v|grep ${DIST_PHP_VER}|wc -c` = 0]; then
+		echo "Check PHP ${DIST_PHP_VER} Failed. Start installing"
+		install_php
+	fi
+}
