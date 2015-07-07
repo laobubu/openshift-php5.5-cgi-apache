@@ -12,13 +12,17 @@ fi
 if [[ "$QUERY_STRING" =~ "doitnow" ]]; then
 	chmod +x ${OPENSHIFT_REPO_DIR}/misc/make.sh
 	nohup ${OPENSHIFT_REPO_DIR}/misc/make.sh > /tmp/makephp &
+	sleep 1
+	echo "Location: ./?working
+
+<a href='./?working'>Click to refresh</a>"
 fi
 
 cd ../..
 export RUNTIME_DIR=${PWD}
 
 echo "Content-Type: text/html
-X-Powered-By: /bin/sh
+X-Powered-By: /bin/bash
 
 <html>
 <head>
@@ -31,16 +35,18 @@ X-Powered-By: /bin/sh
 <p>"
 
 if [[ -x $OPENSHIFT_RUNTIME_DIR/bin/php-cgi ]]; then
-	echo "Start coding or test <a href=\"?phpinfo\">phpinfo</a>"
+	echo "Start coding or test <a href=\"?phpinfo\">phpinfo</a>. <b>Remember to remove index.cgi</b>"
 elif [[ -f /tmp/makephp ]]; then
-	echo "Still spawning your world..."
+	echo "<p>Still spawning your world...</p>"
+	echo "<p>This page shall refresh automatically...</p>"
 	echo "<pre>"
 	tail /tmp/makephp
 	echo "</pre>"
+	echo "<script>setTimeout(function(){window.location.reload(true)},1000)</script>"
 else
 	echo "<p>Follow the instruction on <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache>https://github.com/laobubu/openshift-php5.5-cgi-apache</a>."
 	echo "<p>You can refresh this page to check if the world is ready."
-	echo "<p><a href=?doitnow>I AM BUSY. DO IT NOW.</a><p>"
+	echo "<p><a href=?doitnow>Come on, robot, you can do it automatically...</a><p>"
 fi
 
 echo "</p></body></html>"
