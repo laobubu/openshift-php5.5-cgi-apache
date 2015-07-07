@@ -62,8 +62,12 @@ function install_php() {
 }
 
 function check_php() {
-	if [`$OPENSHIFT_RUNTIME_DIR/bin/php-cgi -v|grep ${DIST_PHP_VER}|wc -c` = 0]; then
-		echo "Check PHP ${DIST_PHP_VER} Failed. Start installing"
-		install_php
+	if [[ -x $OPENSHIFT_RUNTIME_DIR/bin/php-cgi ]] ; then
+	if [[ "`$OPENSHIFT_RUNTIME_DIR/bin/php-cgi`" =~ "${DIST_PHP_VER}" ]] ; then
+		return 0
 	fi
+	fi
+	
+	echo "Check PHP ${DIST_PHP_VER} Failed. Start installing"
+	install_php
 }

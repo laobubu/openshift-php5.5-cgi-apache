@@ -4,7 +4,11 @@ This modified DIY cartridge provides newer PHP and freer Apache configuration, w
 
 ## Quick Start
 1. Push this repo to your OpenShift.
-2. Access SSH and Run `nohup ${OPENSHIFT_REPO_DIR}/misc/make.sh &` to make your own PHP5.5.
+2. Access SSH and Run the following command to make your own PHP5.5.
+```
+chmod +x ${OPENSHIFT_REPO_DIR}/misc/make.sh
+nohup ${OPENSHIFT_REPO_DIR}/misc/make.sh > /tmp/makephp&
+```
 3. Give your family/friend a ring or watch a movie.
 4. Do what you want.
 
