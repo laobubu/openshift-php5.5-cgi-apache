@@ -39,7 +39,7 @@ if [[ -x ${OPENSHIFT_RUNTIME_DIR}/bin/php-cgi ]]; then
 elif [[ -f /tmp/makephp ]]; then
 	echo "<p>Still spawning your world...</p>"
 	echo "<p>This page shall refresh automatically...</p>"
-	echo "<p>Do NOT Close this page...</p>"
+	echo "<p>Now you can close this page, and come back whenever...</p>"
 	echo "<p>Have problem? <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache/issues/new >submit issue.</a></p>"
 	echo "<div style='font-size:.7em;font-family:Courier'>"
 	tail /tmp/makephp
