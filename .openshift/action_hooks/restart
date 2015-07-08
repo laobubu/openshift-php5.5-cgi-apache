@@ -4,3 +4,5 @@
 source ${OPENSHIFT_REPO_DIR}/misc/common.sh
 
 httpd ${HTTPD_ARGUMENT} -k restart
+
+exit 0
