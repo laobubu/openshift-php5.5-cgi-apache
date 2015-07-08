@@ -41,9 +41,9 @@ elif [[ -f /tmp/makephp ]]; then
 	echo "<p>This page shall refresh automatically...</p>"
 	echo "<p>Now you can close this page, and come back whenever...</p>"
 	echo "<p>Have problem? <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache/issues/new >submit issue.</a></p>"
-	echo "<div style='font-size:.7em;font-family:Courier'>"
+	echo "<pre style='font-size:.7em;word-break:break-all;font-family:Courier'>"
 	tail /tmp/makephp
-	echo "</div>"
+	echo "</pre>"
 	echo "<script>setTimeout(function(){window.location.reload(true)},10000)</script>"
 else
 	echo "<p>Follow the instruction on <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache>https://github.com/laobubu/openshift-php5.5-cgi-apache</a>."
