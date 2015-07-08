@@ -34,15 +34,17 @@ X-Powered-By: /bin/bash
 <h2>Next...</h2>
 <p>"
 
-if [[ -x $OPENSHIFT_RUNTIME_DIR/bin/php-cgi ]]; then
+if [[ -x ${OPENSHIFT_RUNTIME_DIR}/bin/php-cgi ]]; then
 	echo "Start coding or test <a href=\"?phpinfo\">phpinfo</a>. <b>Remember to remove index.cgi</b>"
 elif [[ -f /tmp/makephp ]]; then
 	echo "<p>Still spawning your world...</p>"
 	echo "<p>This page shall refresh automatically...</p>"
-	echo "<pre>"
+	echo "<p>Do NOT Close this page...</p>"
+	echo "<p>Have problem? <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache/issues/new >submit issue.</a></p>"
+	echo "<div style='font-size:.7em;font-family:Courier'>"
 	tail /tmp/makephp
-	echo "</pre>"
-	echo "<script>setTimeout(function(){window.location.reload(true)},1000)</script>"
+	echo "</div>"
+	echo "<script>setTimeout(function(){window.location.reload(true)},10000)</script>"
 else
 	echo "<p>Follow the instruction on <a href=https://github.com/laobubu/openshift-php5.5-cgi-apache>https://github.com/laobubu/openshift-php5.5-cgi-apache</a>."
 	echo "<p>You can refresh this page to check if the world is ready."
