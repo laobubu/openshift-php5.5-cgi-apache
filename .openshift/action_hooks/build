@@ -1,0 +1,22 @@
+#!/bin/bash
+
+OPENSHIFT_RUNTIME_DIR=${OPENSHIFT_HOMEDIR}/app-root/runtime
+
+LOG_FILE=/tmp/build_log
+PID_FILE=/tmp/build_pid
+
+PID=` 2>/dev/null cat ${PID_FILE} `
+
+if [ ! -f /proc/$PID/stat ]
+then
+    [ ! -f ${OPENSHIFT_REPO_DIR}/www/index.cgi ] && \
+        cp ${OPENSHIFT_REPO_DIR}/misc/index.cgi ${OPENSHIFT_REPO_DIR}/www/index.cgi
+    nohup bash ${OPENSHIFT_REPO_DIR}/misc/make.sh > ${LOG_FILE} 2>&1 &
+    PID=$!
+    echo $PID > ${PID_FILE}
+    echo "php env build started. proccess pid : ${PID}"
+else
+    echo "seems already building, pid is ${PID}"
+fi
+
+exit 0
