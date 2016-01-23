@@ -7,7 +7,7 @@ PID_FILE=/tmp/build_pid
 
 PID=` 2>/dev/null cat ${PID_FILE} `
 
-if [ ! -f /proc/$PID/stat ]
+if [ ! "$PID" ] || [ ! -f /proc/$PID/stat ]
 then
     [ ! -f ${OPENSHIFT_REPO_DIR}/www/index.cgi ] && \
         cp ${OPENSHIFT_REPO_DIR}/misc/index.cgi ${OPENSHIFT_REPO_DIR}/www/index.cgi

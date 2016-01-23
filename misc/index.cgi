@@ -65,7 +65,7 @@ EOF
 
 echo "<pre>"
 
-if [ ! -f $PID_FILE ] || [ ! -f /proc/${PID}/stat ]; then
+if [ ! -f $PID_FILE ] || [ ! "$PID" ] || [ ! -f /proc/${PID}/stat ]; then
     echo "<b>WARNING: BUILD PROCCESS MIGHT NOT RUNNING</b>"
 else
     echo "<b>build pid = $PID </b>"
