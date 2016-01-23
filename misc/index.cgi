@@ -61,6 +61,13 @@ cat << EOF
 <h2> Build Status </h2>
 EOF
 
+if [[ ! "$QUERY_STRING" =~ "full_log" ]]; then
+    echo "<script>setTimeout(function(){location.href='?_t=' + +new Date()}, 10000)</script>"
+    echo "<p>This page will refresh automatically to keep server awake. Do not close this page.</p>"
+else
+    echo "<p>Auto-refreshing is disabled. To keep server awake, please <a href=\"?_t=0\">go back</a></p>"
+fi
+
 [ "$MESSAGE" ] && echo "<b>$MESSAGE</b>"
 
 echo "<pre>"
@@ -76,5 +83,6 @@ if [ -f $LOG_FILE ]; then
 fi
 
 echo "</pre>"
+
 
 exit 0
