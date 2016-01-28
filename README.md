@@ -9,7 +9,7 @@ This modified DIY cartridge provides PHP 5.5.31 and fully free Apache configurat
 1. Open https://openshift.redhat.com/app/console/application_type/cart!diy-0.1 
 2. Fill **Source Code** text field: `https://github.com/laobubu/openshift-php5.5-cgi-apache.git`
 3. Click **Create Application** and wait
-4. Viola. You can `git clone` your app to your computer and code now
+4. Open your website (e.g. foo-bar.rhcloud.com ) and keep your browser running. Meanwhile, you can `git clone` your app to your computer and start coding.
 5. **IMPORTANT** : your first `git push` shall NOT be earlier than the first building ends
 
 ### Tips
